@@ -1,38 +1,42 @@
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
+
+/**
+ * Script to request SOL tokens from the devnet faucet
+ * 
+ * This script imports our keypair from the dev-wallet.json file,
+ * establishes a connection to the Solana devnet, and requests
+ * an airdrop of 2 SOL tokens to our wallet address.
+ */
+
+// Import the wallet private key
 import wallet from "./dev-wallet.json";
 
-// We're going to import our keypair from the wallet file
+// Recreate the keypair from the saved private key
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));
 
-// Create a Solana devnet connection to get devnet SOL tokens
+// Display wallet information for verification
+console.log(`Requesting airdrop for wallet address: ${keypair.publicKey.toBase58()}`);
+
+// Establish a connection to the Solana devnet
 const connection = new Connection("https://api.devnet.solana.com");
 
+// Function to request an airdrop and display the result
 (async () => {
   try {
-    // We're going to claim 2 devnet SOL tokens
-    console.log(`Requesting 2 SOL airdrop to ${keypair.publicKey.toBase58()}...`);
-    
+    // Request an airdrop of 2 SOL tokens
     const txhash = await connection.requestAirdrop(
       keypair.publicKey, 
       2 * LAMPORTS_PER_SOL
     );
     
-    console.log(`Airdrop transaction submitted. Waiting for confirmation...`);
-    
-    // Wait for transaction confirmation
-    const confirmation = await connection.confirmTransaction(txhash);
-    
-    if (confirmation.value.err) {
-      throw new Error(`Transaction failed: ${confirmation.value.err}`);
-    }
-    
-    // Fetch the new balance
-    const balance = await connection.getBalance(keypair.publicKey);
-    
-    console.log(`Success! New balance: ${balance / LAMPORTS_PER_SOL} SOL`);
-    console.log(`Check out your TX here: 
+    // Display success message with transaction URL
+    console.log(`Success! Check out your TX here: 
     https://explorer.solana.com/tx/${txhash}?cluster=devnet`);
-  } catch(e) {
-    console.error(`Oops, something went wrong: ${e}`);
+    
+    // Get and display the wallet balance after airdrop
+    const balance = await connection.getBalance(keypair.publicKey);
+    console.log(`New wallet balance: ${balance / LAMPORTS_PER_SOL} SOL`);
+  } catch (error) {
+    console.error(`Oops, something went wrong: ${error}`);
   }
 })();

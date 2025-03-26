@@ -8,7 +8,8 @@
     "airdrop": "ts-node ./airdrop.ts",
     "transfer": "ts-node ./transfer.ts",
     "enroll": "ts-node ./enroll.ts",
-    "wallet-convert": "ts-node ./wallet-convert.ts"
+    "wallet-convert": "ts-node ./wallet-convert.ts",
+    "check-balance": "ts-node ./check-balance.ts"
   },
   "dependencies": {
     "@solana/web3.js": "^1.98.0",
