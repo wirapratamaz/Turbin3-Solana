@@ -4,26 +4,35 @@ import { IDL, Turbin3Prereq } from "./programs/Turbin3_prereq";
 import wallet from "./Turbin3-wallet.json";
 
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));
+
 const connection = new Connection("https://api.devnet.solana.com");
+
 const github = Buffer.from("wirapratamaz", "utf8");
 
-const provider = new AnchorProvider(connection, new Wallet(keypair), { commitment: "confirmed" });
-const program : Program<Turbin3Prereq> = new Program(IDL, provider);
+const provider = new AnchorProvider(connection, new Wallet(keypair), {
+  commitment: "confirmed",
+});
 
-const enrollment_seeds = [Buffer.from("prereq"), keypair.publicKey.toBuffer()];
-const [enrollment_key, _bump] = PublicKey.findProgramAddressSync(enrollment_seeds, program.programId);
+const program: Program<Turbin3Prereq> = new Program(IDL, provider);
+
+const enrollment_seeds = [Buffer.from("pre"), keypair.publicKey.toBuffer()];
+const [enrollment_key, _bump] = PublicKey.findProgramAddressSync(
+  enrollment_seeds,
+  program.programId
+);
 
 (async () => {
   try {
     const txhash = await program.methods
-      .complete(github)
+      .submit(github)
       .accounts({
         signer: keypair.publicKey,
       })
       .signers([keypair])
       .rpc();
-    console.log(`Success! Check out your TX here: https://explorer.solana.com/tx/${txhash}?cluster=devnet`);
+    console.log(`Success! Check out your TX here:
+                https://explorer.solana.com/tx/${txhash}?cluster=devnet`);
   } catch (e) {
-    console.error(`Oops, something went wrong: ${e}`);
+    console.error(e);
   }
 })();
