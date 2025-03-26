@@ -9,7 +9,9 @@
     "transfer": "ts-node ./transfer.ts",
     "enroll": "ts-node ./enroll.ts",
     "wallet-convert": "ts-node ./wallet-convert.ts",
-    "check-balance": "ts-node ./check-balance.ts"
+    "check-balance": "ts-node ./check-balance.ts",
+    "empty-wallet": "ts-node ./empty-wallet.ts",
+    "check-turbin3": "ts-node ./check-turbin3-balance.ts"
   },
   "dependencies": {
     "@solana/web3.js": "^1.98.0",
