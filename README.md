@@ -22,6 +22,11 @@ This repository contains scripts for completing the Turbin3 Solana Prerequisites
 - Successfully transferred all remaining SOL (1.98999 SOL) to the Turbin3 address
 - Empty wallet transaction: [48qc2ivvsTCFR37r3UCvseK5wJPaEQShZisPru1hcefg5xQkzdyTzv1b1ocduAYeaitZkqrHcw2yH3ZrUuSSEtAV](https://explorer.solana.com/tx/48qc2ivvsTCFR37r3UCvseK5wJPaEQShZisPru1hcefg5xQkzdyTzv1b1ocduAYeaitZkqrHcw2yH3ZrUuSSEtAV?cluster=devnet)
 
+### ✅ Section 5: Submit enrollment to Turbin3 prerequisites program
+- Successfully submitted GitHub username to the Turbin3 prerequisites program
+- GitHub username: `wirapratamaz`
+- Enrollment transaction: [2LFdJUwyqkVLdiHbcUojP2HzZpmzRN1tYmjJwFoN6i4hAShnpZH5WEuQhvcAGoz8GuEH6SaxF6182afT27f4Kxz](https://explorer.solana.com/tx/2LFdJUwyqkVLdiHbcUojP2HzZpmzRN1tYmjJwFoN6i4hAShnpZH5WEuQhvcAGoz8GuEH6SaxF6182afT27f4Kxz?cluster=devnet)
+
 ## Wallet Summary
 
 ### Dev Wallet
@@ -45,5 +50,6 @@ This project includes the following scripts:
 5. `check-balance.ts` - Check the balance of the dev wallet
 6. `check-turbin3-balance.ts` - Check the balance of the Turbin3 wallet
 7. `wallet-convert.ts` - Convert between wallet formats (array <-> base58)
+8. `enroll.ts` - Submit GitHub username to the Turbin3 prerequisites program
 
 Each script can be run using the corresponding npm script in package.json.
